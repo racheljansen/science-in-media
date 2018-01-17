@@ -1,0 +1,3 @@
+*.ipynb_checkpoints
+*/*.ipynb_checkpoints
+paxton-nyt_api_key.txt
