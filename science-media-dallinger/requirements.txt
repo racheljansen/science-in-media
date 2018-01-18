@@ -1,0 +1,2 @@
+dallinger==3.4.1
+#-e git://github.com/Dallinger/Dallinger.git@f3b26695d955631e4783f19db57ddfd7498eea83#egg=dallinger
