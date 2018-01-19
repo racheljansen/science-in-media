@@ -102,7 +102,7 @@ var get_info = function() {
         type: 'json',
         success: function (resp) {
             var story = resp.infos[0].contents;
-            var storyHTML = markdown.toHTML(story);
+            var storyHTML = story;
             $("#story").html(storyHTML);
             $("#stimulus").show();
             $("#response-form").hide();

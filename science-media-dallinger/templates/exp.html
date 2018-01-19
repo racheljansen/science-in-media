@@ -13,14 +13,15 @@
     <body>
         <div class="main_div">
             <div id="stimulus">
-                <h1>Read the following text:</h1>
-                <div><blockquote id="story"><p>&lt;&lt; loading &gt;&gt;</p></blockquote></div>
+                <h3>Read the following:</h3>
+                <div id="story"><p>&lt;&lt; loading &gt;&gt;</p></div>
                 <button id="finish-reading" type="button" class="btn btn-primary">I'm done reading.</button>
             </div>
 
             <div id="response-form" style="display:none;">
                 <h1>Please summarize what you read in a few sentences:</h1>
                 <textarea id="reproduction" class="form-control" rows="10"></textarea>
+                <p>Unless you are the last to participate, your response will be shown to a future participant.</p>
                 <p></p>
                 <button id="submit-response" type="button" class="btn btn-primary">Submit response.</button>
             </div>

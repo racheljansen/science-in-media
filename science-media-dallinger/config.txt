@@ -6,7 +6,7 @@ group_name = science_media
 
 [MTurk]
 title = Science in the Media
-description = Read a brief article and summarize it.
+description = Read a brief article and then answer a survey.
 keywords = Psychology, reading, text
 base_payment = 1.00
 lifetime = 24

@@ -31,7 +31,7 @@ class Bartlett1932(Experiment):
         super(Bartlett1932, self).__init__(session)
         import models
         self.models = models
-        self.experiment_repeats = 5
+        self.experiment_repeats = 1
         self.initial_recruitment_size = 1
         if session:
             self.setup()
@@ -46,12 +46,12 @@ class Bartlett1932(Experiment):
         """
         if not self.networks():
             super(Bartlett1932, self).setup()
-            for i,net in enumerate(self.networks()):
-                self.models.WarOfTheGhostsSource(network=net, story_num=i)
+            for net in self.networks():
+                self.models.WarOfTheGhostsSource(network=net)
 
     def create_network(self):
         """Return a new network."""
-        return Chain(max_size=4)
+        return Chain(max_size=5)
 
     def add_node_to_network(self, node, network):
         """Add node to the chain and receive transmissions."""
