@@ -82,6 +82,7 @@
                    <input id="multi-confusing" name="multi-confusing" type="text" class="form-control input-md">
              </div>
             </div>
+            <br>
             <hr>
             <br>
             <div class="row question">
@@ -184,7 +185,7 @@
                     <input type = "radio"
                          name = "own_research"
                          id = "own_research"
-                         value = "yes">Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                         value = "yes_own">Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <input type = "radio"
                          name = "own_research"
                          id = "own_research"
@@ -228,58 +229,56 @@
             </div>
             <br>
             <div class="row question">
-                <div class="col-md-8">
-                    Are you a native English speaker?
-                </div>
-                <div class="col-md-4">
-                    <input type = "radio"
-                       name = "native_english"
-                       id = "native_english"
-                       value = "yes">Yes, native monolingual English speaker<br>
-                    <input type = "radio"
-                      name = "native_english"
-                      id = "native_english"
-                      value = "bilingual">Yes, native bilingual English speaker (with any other language)<br>
-                    <input type = "radio"
-                       name = "native_english"
-                       id = "native_english"
-                       value = "no_but_fully_fluent">No, but fully fluent English speaker<br>
-                    <input type = "radio"
-                       name = "native_english"
-                       id = "native_english"
-                       value = "no_but_conversationally_fluent">No, but conversationally fluent English speaker<br>
-                    <input type = "radio"
-                       name = "native_english"
-                       id = "native_english"
-                       value = "decline">Prefer not to say<br>
-                </div>
+              <div class="col-md-8">
+                  Are you a native English speaker?
+              </div>
+              <table cellspacing="0" cellpadding="0" style="margin: 0; padding: 0; border: 0; outline: 0; vertical-align: baseline; background: transparent; white-space:nowrap;">
+                      <tr><td><input type = "radio"
+                                 name = "native_english"
+                                 id = "native_english"
+                                 value = "yes">Yes, native monolingual English speaker</td></tr>
+                      <tr><td><input type = "radio"
+                                name = "native_english"
+                                id = "native_english"
+                                value = "bilingual">Yes, native bilingual English speaker (with any other language)</td></tr>
+                      <tr><td><input type = "radio"
+                               name = "native_english"
+                               id = "native_english"
+                               value = "no_but_fully_fluent">No, but fully fluent English speaker</td></tr>
+                      <tr><td><input type = "radio"
+                               name = "native_english"
+                               id = "native_english"
+                               value = "no_but_conversationally_fluent">No, but conversationally fluent English speaker</td></tr>
+                      <tr><td><input type = "radio"
+                               name = "native_english"
+                               id = "native_english"
+                               value = "decline">Prefer not to say</td></tr>
+                  </table>
             </div>
             <br>
             <div class="row question">
+                <div class="col-md-8">
+                    What is your ethnicity/race? (Check all that apply.)
+                </div>
                 <table cellspacing="0" cellpadding="0" style="margin: 0; padding: 0; border: 0; outline: 0; vertical-align: baseline; background: transparent; white-space:nowrap;">
-                <th style="text-align:left">What is your ethnicity/race? (Check all that apply.)</caption>
                   <tr>
-                      <td><input type = "checkbox"
-                      name = "ethnicity_race"
-                      id = "ethnicity_race"
-                      value = "african_american">African American or Black</td>
-                      <td><input type = "checkbox"
-                         name = "ethnicity_race"
-                         id = "ethnicity_race"
-                         value = "asian">Asian</td>
-                  </tr>
-                  <br>
+                        <td><input type = "checkbox"
+                            name = "ethnicity_race"
+                            id = "ethnicity_race"
+                            value = "african_american">African American or Black</td>
+                        <td><input type = "checkbox"
+                             name = "ethnicity_race"
+                             id = "ethnicity_race"
+                             value = "asian">Asian</td>
                   <tr>
-                      <td><input type = "checkbox"
-                         name = "ethnicity_race"
-                         id = "ethnicity_race"
-                         value = "hispanic_latinx">Hispanic or Latinx</td>
-                      <td><input type = "checkbox"
-                        name = "ethnicity_race"
-                        id = "ethnicity_race"
-                        value = "nativeamerican_alaskanative">Native American or Alaska Native</td>
-                  </tr>
-                  <br>
+                        <td><input type = "checkbox"
+                             name = "ethnicity_race"
+                             id = "ethnicity_race"
+                             value = "hispanic_latinx">Hispanic or Latinx</td>
+                        <td><input type = "checkbox"
+                              name = "ethnicity_race"
+                              id = "ethnicity_race"
+                              value = "nativeamerican_alaskanative">Native American or Alaska Native</td>
                   <tr>
                       <td><input type = "checkbox"
                         name = "ethnicity_race"
@@ -289,10 +288,7 @@
                          name = "ethnicity_race"
                          id = "ethnicity_race"
                          value = "white">White</td>
-                  </tr>
-                  <br>
-                  <tr>
-                      <td><input type = "checkbox"
+                  <tr><td><input type = "checkbox"
                         name = "ethnicity_race"
                         id = "ethnicity_race"
                         value = "other">Other</td>
