@@ -36,6 +36,7 @@
                     </select>
                 </div>
             </div>
+            <br>
             <div class="row question">
                 <div class="col-md-8">
                     On a scale of 1-10 (where 10 is the most difficult), please rate how <b>DIFFICULT</b> you found the learning task:
@@ -53,6 +54,193 @@
                         <option value="2">2</option>
                         <option value="1">1 - Very easy</option>
                     </select>
+                </div>
+            </div>
+            <br>
+            <div class="row question">
+                <div class="col-md-8">
+                    While writing the summary on the previous page, did you return to the original link or look at any other sources? You will still be compensated if you did, so please be honest.
+                </div>
+                <div class="col-md-4">
+                    <input type = "radio"
+                         name = "sources_during_summary"
+                         id = "sources_during_summary"
+                         value = "yes">Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type = "radio"
+                         name = "sources_during_summary"
+                         id = "sources_during_summary"
+                         value = "no">No<br>
+                </div>
+            </div>
+            <br>
+            <div class="row question">
+                <div class="col-md-8">
+                    Do you think you had heard of the study you read about before?
+                </div>
+                <div class="col-md-4">
+                    <input type = "radio"
+                         name = "previous_knowledge"
+                         id = "previous_knowledge"
+                         value = "yes">Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type = "radio"
+                         name = "previous_knowledge"
+                         id = "previous_knowledge"
+                         value = "no">No<br>
+                </div>
+            </div>
+            <br>
+            <div class="row question">
+                <div class="col-md-8">
+                    How many psychology or cognitive science classes have you taken (university level or above)? (Please estimate if you're not sure.)
+                </div>
+                <div class="col-md-4">
+                    <input type = "radio"
+                       name = "psych_classes"
+                       id = "psych_classes"
+                       value = "0">0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type = "radio"
+                        name = "psych_classes"
+                        id = "psych_classes"
+                        value = "1">1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type = "radio"
+                       name = "psych_classes"
+                       id = "psych_classes"
+                       value = "2">2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type = "radio"
+                        name = "psych_classes"
+                        id = "psych_classes"
+                        value = "3_or_more">3+<br>
+                </div>
+            </div>
+            <br>
+            <div class="row question">
+                <div class="col-md-8">
+                    Have you been involved in helping to conduct any psychology research (either conducting your own studies or helping other people conduct studies)?
+                </div>
+                <div class="col-md-4">
+                    <input type = "radio"
+                         name = "own_research"
+                         id = "own_research"
+                         value = "yes">Yes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type = "radio"
+                         name = "own_research"
+                         id = "own_research"
+                         value = "no">No<br>
+                </div>
+            </div>
+            <br>
+            <div class="row question">
+                <div class="col-md-8">
+                    How old are you?
+                </div>
+                <div class="col-md-4">
+                    <input type="number" name="age"><br>
+                </div>
+            </div>
+            <br>
+            <div class="row question">
+                <div class="col-md-8">
+                    What is your gender identity?
+                </div>
+                <div class="col-md-4">
+                    <input type = "radio"
+                       name = "gender_id"
+                       id = "gender_id"
+                       value = "woman">Woman&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type = "radio"
+                       name = "gender_id"
+                       id = "gender_id"
+                       value = "man">Man&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type = "radio"
+                      name = "gender_id"
+                      id = "gender_id"
+                      value = "other">Other&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type = "radio"
+                       name = "gender_id"
+                       id = "gender_id"
+                       value = "decline">Prefer not to say<br>
+                </div>
+            </div>
+            <br>
+            <div class="row question">
+                <div class="col-md-8">
+                    Are you a native English speaker?
+                </div>
+                <div class="col-md-4">
+                    <input type = "radio"
+                       name = "native_english"
+                       id = "native_english"
+                       value = "yes">Yes, native monolingual English speaker<br>
+                    <input type = "radio"
+                      name = "native_english"
+                      id = "native_english"
+                      value = "bilingual">Yes, native bilingual English speaker (with any other language)<br>
+                    <input type = "radio"
+                       name = "native_english"
+                       id = "native_english"
+                       value = "no_but_fully_fluent">No, but fully fluent English speaker<br>
+                    <input type = "radio"
+                       name = "native_english"
+                       id = "native_english"
+                       value = "no_but_conversationally_fluent">No, but conversationally fluent English speaker<br>
+                    <input type = "radio"
+                       name = "native_english"
+                       id = "native_english"
+                       value = "decline">Prefer not to say<br>
+                </div>
+            </div>
+            <br>
+            <div class="row question">
+                <div class="col-md-8">
+                    What is your ethnicity/race? (Check all that apply.)
+                </div>
+                <div class="col-md-4">
+                    <table style="margin: 0; padding: 0; border: 0; outline: 0; vertical-align: baseline; background: transparent; white-space:nowrap;">
+                      <th>
+                      <tr>
+                          <td><input type = "checkbox"
+                          name = "ethnicity_race"
+                          id = "ethnicity_race"
+                          value = "african_american">African American or Black</td>
+                          <td><input type = "checkbox"
+                             name = "ethnicity_race"
+                             id = "ethnicity_race"
+                             value = "asian">Asian</td>
+                      </tr>
+                      <br>
+                      <tr>
+                          <td><input type = "checkbox"
+                             name = "ethnicity_race"
+                             id = "ethnicity_race"
+                             value = "hispanic_latinx">Hispanic or Latinx</td>
+                          <td><input type = "checkbox"
+                            name = "ethnicity_race"
+                            id = "ethnicity_race"
+                            value = "nativeamerican_alaskanative">Native American or Alaska Native</td>
+                      </tr>
+                      <br>
+                      <tr>
+                          <td><input type = "checkbox"
+                            name = "ethnicity_race"
+                            id = "ethnicity_race"
+                            value = "nativehawaiian_pacificislander">Native Hawaiian or Pacific Islander</td>
+                          <td><input type = "checkbox"
+                             name = "ethnicity_race"
+                             id = "ethnicity_race"
+                             value = "white">White</td>
+                      </tr>
+                      <br>
+                      <tr>
+                          <td><input type = "checkbox"
+                            name = "ethnicity_race"
+                            id = "ethnicity_race"
+                            value = "other">Other</td>
+                          <td><input type = "checkbox"
+                            name = "ethnicity_race"
+                            id = "ethnicity_race"
+                            value = "decline">Prefer not to say</td>
+                      </tr>
+                    </table>
                 </div>
             </div>
         </form>
