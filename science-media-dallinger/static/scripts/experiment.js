@@ -1,5 +1,8 @@
 var my_node_id;
 
+// Prevent multiple submissions.
+lock = false;
+
 // Consent to the experiment.
 $(document).ready(function() {
 
@@ -29,13 +32,13 @@ $(document).ready(function() {
         window.close();
     });
 
-    // Consent to the experiment.
+    // Move on to the experiment.
     $("#go-to-experiment").click(function() {
         allow_exit();
         window.location.href = '/exp';
     });
 
-
+    // Confirm that we're done with reading the stimulus.
     $("#finish-reading").click(function() {
         $("#stimulus").hide();
         $("#response-form").show();
@@ -64,10 +67,54 @@ $(document).ready(function() {
         });
     });
 
-    // Submit the questionnaire.
-    $("#submit-questionnaire").click(function() {
-      mySubmitResponses();
+    // // Submit the questionnaire.
+    // $("#submit-questionnaire").click(function() {
+    //   mySubmitResponses();
+    // });
+
+    // Move on to the experiment.
+    $("#go-to-experiment").click(function () {
+        allow_exit();
+        window.location.href = '/exp';
     });
+
+    // Submit the questionnaire ONLY if we haven't clicked yet.
+    // Adapted from Dallinger Griduniverse repo:
+    // https://github.com/Dallinger/Griduniverse/blob/master/dlgr/griduniverse/static/scripts/questionnaire.js
+    if (lock===false){
+        $("#submit-questionnaire").click(function () {
+
+          // Prevent multiple submission clicks.
+          lock = true;
+          $(document).off('click');
+
+          // Allow the form to submit.
+          var $elements = [$("form :input"), $(this)],
+              questionSubmission = Dallinger.submitQuestionnaire("questionnaire");
+              console.log("Submitting questionnaire.");
+
+          // Submit questionnaire.
+          questionSubmission.done(function() {
+                go_to_page('debriefing');
+              });
+      });
+    };
+
+    // Finish debriefing and submit HIT.
+    if (lock===false){
+
+        // Finish the experiment.
+        $("#finish-experiment").click(function() {
+
+          // Prevent multiple submission clicks.
+          lock = true;
+          $(document).off('click');
+
+          // Submit the HIT.
+          submitAssignment();
+        });
+    };
+
 });
 
 // Create the agent.
@@ -153,4 +200,37 @@ var mySubmitNextResponse = function (n, callback) {
             callback()
         }
     });
+};
+
+
+// Add new (not yet released) code from Dallinger.
+Dallinger.submitQuestionnaire = function (name) {
+  var formSerialized = $("form").serializeArray(),
+      formDict = {},
+      deferred = $.Deferred();
+
+  formSerialized.forEach(function (field) {
+      formDict[field.name] = field.value;
+  });
+
+  reqwest({
+    method: "post",
+    url: "/question/" + participant_id,
+    data: {
+      question: name || "questionnaire",
+      number: 1,
+      response: JSON.stringify(formDict),
+    },
+    type: "json",
+    success: function (resp) {
+      deferred.resolve();
+    },
+    error: function (err) {
+      deferred.reject();
+      var errorResponse = JSON.parse(err.response);
+      $("body").html(errorResponse.html);
+    }
+  });
+
+  return deferred;
 };
