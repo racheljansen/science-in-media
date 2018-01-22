@@ -248,7 +248,7 @@ function checkWordCount(){
   s = s.replace(/(^\s*)|(\s*$)/gi,"");
   s = s.replace(/[ ]{2,}/gi," ");
   s = s.replace(/\n /,"\n");
-  if (s.split(' ').length <= 15) {
+  if (s.split(' ').length <= 2) {
     alert("Please expand a little more on what you have written.");
     return false
   }
