@@ -13,17 +13,19 @@
     <body>
         <div class="main_div">
             <div id="stimulus">
-                <h3>Read the following:</h3>
+                <h3>Please read the following passage:</h3>
                 <div id="story"><p>&lt;&lt; loading &gt;&gt;</p></div>
-                <button id="finish-reading" type="button" class="btn btn-primary">I'm done reading.</button>
+                <p>Click the button below when finished.</p>
+                <button id="finish-reading" type="button" class="btn btn-primary">I'm done reading</button>
             </div>
 
             <div id="response-form" style="display:none;">
-                <h1>Please summarize what you read in a few sentences:</h1>
+                <h1>Please summarize what you read.</h1>
+                  <p>Summarize what you read as though you were explaining it to a friend,
+                    using at least 100 words.</p>
                 <textarea id="reproduction" class="form-control" rows="10"></textarea>
-                <p>Unless you are the last to participate, your response will be shown to a future participant.</p>
                 <p></p>
-                <button id="submit-response" type="button" class="btn btn-primary">Submit response.</button>
+                <button id="submit-response" type="button" class="btn btn-primary">Submit summary</button>
             </div>
         </div>
     </body>
