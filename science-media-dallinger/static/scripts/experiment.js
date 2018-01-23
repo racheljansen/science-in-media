@@ -82,7 +82,7 @@ $(document).ready(function() {
     // Adapted from Dallinger Griduniverse repo:
     // https://github.com/Dallinger/Griduniverse/blob/master/dlgr/griduniverse/static/scripts/questionnaire.js
     if (lock===false){
-        $("#submit-questionnaire").click(function () {
+        $("#submit-questionnaire").click(function() {
 
           // Prevent multiple submission clicks.
           lock = true;
@@ -90,7 +90,7 @@ $(document).ready(function() {
 
           // Allow the form to submit.
           var $elements = [$("form :input"), $(this)],
-              questionSubmission = Dallinger.submitQuestionnaire("questionnaire");
+              questionSubmission = dallinger.submitQuestionnaire("questionnaire");
               console.log("Submitting questionnaire.");
 
           // Submit questionnaire.
@@ -111,7 +111,7 @@ $(document).ready(function() {
           $(document).off('click');
 
           // Submit the HIT.
-          submitAssignment();
+          dallinger.submitAssignment();
         });
     };
 
@@ -164,7 +164,7 @@ var get_info = function() {
 };
 
 var mySubmitResponses = function () {
-    mySubmitNextResponse(0, submitAssignment);
+    mySubmitNextResponse(0, dallinger.submitAssignment);
 };
 
 var mySubmitNextResponse = function (n, callback) {
@@ -204,7 +204,7 @@ var mySubmitNextResponse = function (n, callback) {
 
 
 // Add new (not yet released) code from Dallinger.
-Dallinger.submitQuestionnaire = function (name) {
+dallinger.submitQuestionnaire = function (name) {
   var formSerialized = $("form").serializeArray(),
       formDict = {},
       deferred = $.Deferred();
@@ -215,7 +215,7 @@ Dallinger.submitQuestionnaire = function (name) {
 
   reqwest({
     method: "post",
-    url: "/question/" + participant_id,
+    url: "/question/" + dallinger.identity.participantId,
     data: {
       question: name || "questionnaire",
       number: 1,
