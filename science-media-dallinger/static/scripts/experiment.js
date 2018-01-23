@@ -1,4 +1,5 @@
 var my_node_id;
+var minimum_word_length = 30;
 
 // Prevent multiple submissions.
 lock = false;
@@ -248,7 +249,7 @@ function checkWordCount(){
   s = s.replace(/(^\s*)|(\s*$)/gi,"");
   s = s.replace(/[ ]{2,}/gi," ");
   s = s.replace(/\n /,"\n");
-  if (s.split(' ').length <= 2) {
+  if (s.split(' ').length <= minimum_word_length) {
     alert("Please expand a little more on what you have written.");
     return false
   }
