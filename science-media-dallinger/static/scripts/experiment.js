@@ -112,7 +112,7 @@ $(document).ready(function() {
     // Finish the experiment.
     $("#finish-experiment").click(function() {
 
-      allow_exit();
+      dallinger.allowExit();
 
       // Prevent multiple submission clicks.
       lock = true;
