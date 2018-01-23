@@ -22,19 +22,19 @@ $(document).ready(function() {
         store.set("assignment_id", getUrlParameter("assignment_id"));
         store.set("mode", getUrlParameter("mode"));
 
-        allow_exit();
+        dallinger.allowExit();
         window.location.href = '/instructions';
     });
 
     // Consent to the experiment.
     $("#no-consent").click(function() {
-        allow_exit();
+        dallinger.allowExit();
         window.close();
     });
 
     // Move on to the experiment.
     $("#go-to-experiment").click(function() {
-        allow_exit();
+        dallinger.allowExit();
         window.location.href = '/exp';
     });
 
@@ -74,7 +74,7 @@ $(document).ready(function() {
 
     // Move on to the experiment.
     $("#go-to-experiment").click(function () {
-        allow_exit();
+        dallinger.allowExit();
         window.location.href = '/exp';
     });
 
@@ -135,7 +135,7 @@ var create_agent = function() {
             if (errorResponse.hasOwnProperty('html')) {
                 $('body').html(errorResponse.html);
             } else {
-                allow_exit();
+                dallinger.allowExit();
                 go_to_page('questionnaire');
             }
         }
