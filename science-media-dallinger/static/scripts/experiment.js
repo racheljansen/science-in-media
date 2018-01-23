@@ -95,7 +95,7 @@ $(document).ready(function() {
 
           // Submit questionnaire.
           questionSubmission.done(function() {
-                go_to_page('debriefing');
+                dallinger.goToPage('debriefing');
               });
       });
     };
@@ -136,7 +136,7 @@ var create_agent = function() {
                 $('body').html(errorResponse.html);
             } else {
                 dallinger.allowExit();
-                go_to_page('questionnaire');
+                dallinger.goToPage('questionnaire');
             }
         }
     });
