@@ -55,7 +55,7 @@ $(document).ready(function() {
         $("#reproduction").val("");
 
         reqwest({
-            url: "/info/" + my_node_id,
+            url: "/info/" + dallinger.identity.participantId,
             method: 'post',
             data: {
                 contents: response,
@@ -121,7 +121,7 @@ $(document).ready(function() {
 var create_agent = function() {
     $('#finish-reading').prop('disabled', true);
     reqwest({
-        url: "/node/" + participant_id,
+        url: "/node/" + dallinger.identity.participantId,
         method: 'post',
         type: 'json',
         success: function (resp) {
