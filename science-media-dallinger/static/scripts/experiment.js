@@ -86,25 +86,24 @@ $(document).ready(function() {
   // Adapted from Dallinger Griduniverse repo:
   // https://github.com/Dallinger/Griduniverse/blob/master/dlgr/griduniverse/static/scripts/questionnaire.js
   if (lock===false){
-    $("#submit-questionnaire").click(function () {
+      $("#submit-questionnaire").click(function (){
 
-      dallinger.allowExit();
+          dallinger.allowExit();
 
-      // Prevent multiple submission clicks.
-      lock = true;
-      $(document).off('click');
+          // Prevent multiple submission clicks.
+          lock = true;
+          $(document).off('click');
 
-      // Allow the form to submit.
-      var $elements = [$("form :input"), $(this)],
-          questionSubmission = dallinger.submitQuestionnaire("questionnaire");
-          console.log("Submitting questionnaire.");
+          // Allow the form to submit.
+          var $elements = [$("form :input"), $(this)],
+              questionSubmission = dallinger.submitQuestionnaire("questionnaire");
+              console.log("Submitting questionnaire.");
 
-      // Submit questionnaire.
-      questionSubmission.done(function() {
-            dallinger.goToPage('debriefing');
-          });
+          // Submit questionnaire.
+          questionSubmission.done(function(){
+                dallinger.goToPage('debriefing');
+              });
       });
-    });
   };
 
   // Finish debriefing and submit HIT.
