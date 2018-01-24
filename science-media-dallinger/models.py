@@ -18,7 +18,7 @@ class WarOfTheGhostsSource(Source):
             "article2.html",
             "article3.html",
             "article4.html",
-            "article5.html",                        
+            "article5.html",
         ]
         story = random.choice(stories)
         with open("static/stimuli/{}".format(story), "r") as f:
