@@ -119,9 +119,10 @@ var create_agent = function() {
   });
 };
 
+// Get info from the network.
 var get_info = function() {
   reqwest({
-    url: "/node/" + my_node_id + "/received_infos",
+    url: "/node/" + dallinger.identity.participantId + "/received_infos",
     method: 'get',
     type: 'json',
     success: function (resp) {
