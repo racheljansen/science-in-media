@@ -1,4 +1,6 @@
 var my_node_id;
+var story;
+var storyHTML;
 var minimum_word_length = 30;
 
 // Prevent multiple submissions.
@@ -59,7 +61,7 @@ $(document).ready(function() {
       $("#reproduction").val("");
 
       reqwest({
-        url: "/info/" + dallinger.identity.participantId,
+        url: "/info/" + my_node_id,
         method: 'post',
         data: {
           contents: response,
@@ -122,12 +124,13 @@ var create_agent = function() {
 // Get info from the network.
 var get_info = function() {
   reqwest({
-    url: "/node/" + dallinger.identity.participantId + "/received_infos",
+    url: "/node/" + my_node_id + "/received_infos",
     method: 'get',
     type: 'json',
     success: function (resp) {
-      var story = resp.infos[0].contents;
-      var storyHTML = story;
+      story = resp.infos[0].contents;
+      console.log(story)
+      storyHTML = story;
       $("#story").html(storyHTML);
       $("#stimulus").show();
       $("#response-form").hide();
