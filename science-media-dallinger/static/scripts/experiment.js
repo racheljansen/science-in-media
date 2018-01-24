@@ -81,19 +81,19 @@ $(document).ready(function() {
   });
 
   // Submit the questionnaire ONLY if we haven't clicked yet.
-  if (lock===false){
+  // if (lock===false){
     $("#submit-questionnaire").click(function (){
 
       dallinger.allowExit();
 
       // Prevent multiple submission clicks.
-      lock = true;
-      $(document).off('click');
+      // lock = true;
+      // $(document).off('click');
 
       // Submit the questionnaire.
       mySubmitResponses();
     });
-  };
+  // };
 });
 
 // Create the agent.
