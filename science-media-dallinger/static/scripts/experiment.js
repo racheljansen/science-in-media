@@ -79,8 +79,6 @@ $(document).ready(function() {
   });
 
   // Submit the questionnaire ONLY if we haven't clicked yet.
-  // Adapted from Dallinger Griduniverse repo:
-  // https://github.com/Dallinger/Griduniverse/blob/master/dlgr/griduniverse/static/scripts/questionnaire.js
   if (lock===false){
     $("#submit-questionnaire").click(function (){
 
@@ -193,6 +191,7 @@ function checkWordCount(){
   return true
 }
 
+// Implement profanity filter.
 function checkBadWords(){
 
   s = document.getElementById("reproduction").value;
