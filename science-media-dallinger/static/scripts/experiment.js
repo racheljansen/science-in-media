@@ -203,9 +203,9 @@ function checkBadWords(){
   if(containsProfanity(s)){
     alert("An expletive was detected in your text. Please do not use profanity here.");
     return false
-  }
+  } else {
     return true
-  }
+  };
 }
 
 // from: https://gist.github.com/gidili/4684261
