@@ -72,11 +72,6 @@ $(document).ready(function() {
     }
   });
 
-  // // Submit the questionnaire.
-  // $("#submit-questionnaire").click(function() {
-  //   mySubmitResponses();
-  // });
-
   // Move on to the experiment.
   $("#go-to-experiment").click(function () {
     dallinger.allowExit();
@@ -95,35 +90,10 @@ $(document).ready(function() {
       lock = true;
       $(document).off('click');
 
-      // Allow the form to submit.
-      var $elements = [$("form :input"), $(this)],
-      questionSubmission = dallinger.submitQuestionnaire("questionnaire");
-      console.log("Submitting questionnaire.");
-
-      // Submit questionnaire.
-      questionSubmission.done(function(){
-        dallinger.goToPage('debriefing');
-      });
+      // Submit the questionnaire.
+      mySubmitResponses();
     });
   };
-
-  // Finish debriefing and submit HIT.
-  if (lock===false){
-
-    // Finish the experiment.
-    $("#finish-experiment").click(function() {
-
-      dallinger.allowExit();
-
-      // Prevent multiple submission clicks.
-      lock = true;
-      $(document).off('click');
-
-      // Submit the HIT.
-      dallinger.submitAssignment();
-    });
-  };
-
 });
 
 // Create the agent.
@@ -171,79 +141,46 @@ var get_info = function() {
     }
   });
 };
-
 var mySubmitResponses = function () {
-  mySubmitNextResponse(0, dallinger.submitAssignment);
+    mySubmitNextResponse(0, dallinger.submitAssignment);
 };
 
 var mySubmitNextResponse = function (n, callback) {
 
-  // Get all the ids.
-  var ids = $("form .question select, input, textarea").map(
-    function () {
-      return $(this).attr("id");
-    }
-  );
+    // Get all the ids.
+    var ids = $("form .question select, input, textarea").map(
+        function () {
+            return $(this).attr("id");
+        }
+    );
 
-  reqwest({
-    url: "/question/" + participant_id,
-    method: "post",
-    type: "json",
-    data: {
-      question: $("#" + ids[n]).attr("name"),
-      number: n + 1,
-      response: $("#" + ids[n]).val()
-    },
-    success: function() {
-      if (n <= ids.length) {
-        mySubmitNextResponse(n + 1, callback);
-      } else {
-        callback()
-      }
-    },
-    error: function (err) {
-      var errorResponse = JSON.parse(err.response);
-      if (errorResponse.hasOwnProperty("html")) {
-        $("body").html(errorResponse.html);
-      }
-      callback()
-    }
-  });
+    reqwest({
+        url: "/question/" + dallinger.identity.participantId,
+        method: "post",
+        type: "json",
+        data: {
+            question: $("#" + ids[n]).attr("name"),
+            number: n + 1,
+            response: $("#" + ids[n]).val()
+        },
+        success: function() {
+            if (n <= ids.length) {
+                mySubmitNextResponse(n + 1, callback);
+            } else {
+              callback()
+            }
+        },
+        error: function (err) {
+            var errorResponse = JSON.parse(err.response);
+            if (errorResponse.hasOwnProperty("html")) {
+                $("body").html(errorResponse.html);
+            }
+            callback()
+        }
+    });
 };
 
-
-// Add new (not yet released) code from Dallinger.
-dallinger.submitQuestionnaire = function (name) {
-  var formSerialized = $("form").serializeArray(),
-  formDict = {},
-  deferred = $.Deferred();
-
-  formSerialized.forEach(function (field) {
-    formDict[field.name] = field.value;
-  });
-
-  reqwest({
-    method: "post",
-    url: "/question/" + dallinger.identity.participantId,
-    data: {
-      question: name || "questionnaire",
-      number: 1,
-      response: JSON.stringify(formDict),
-    },
-    type: "json",
-    success: function (resp) {
-      deferred.resolve();
-    },
-    error: function (err) {
-      deferred.reject();
-      var errorResponse = JSON.parse(err.response);
-      $("body").html(errorResponse.html);
-    }
-  });
-
-  return deferred;
-};
-
+// Check word count.
 function checkWordCount(){
   s = document.getElementById("reproduction").value;
   s = s.replace(/(^\s*)|(\s*$)/gi,"");
