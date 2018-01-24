@@ -1,0 +1,285 @@
+{% extends "base/questionnaire.html" %}
+
+{% block questions %}
+    <div class="row question">
+        <div class="col-md-8">
+            On a scale of 1-10 (where 10 is the most engaged), please rate how <b>ENGAGED</b> you were while performing the task:
+        </div>
+        <div class="col-md-4">
+            <select id="engagement" name="engagement">
+                <option value="10">10 - Very engaged</option>
+                <option value="9">9</option>
+                <option value="8">8</option>
+                <option value="7">7</option>
+                <option value="6">6</option>
+                <option value="5" SELECTED>5 - Moderately engaged</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1 - Not engaged</option>
+            </select>
+        </div>
+    </div>
+    <br>
+    <div class="row question">
+        <div class="col-md-8">
+            On a scale of 1-10 (where 10 is the most difficult), please rate how <b>DIFFICULT</b> you found this task:
+        </div>
+        <div class="col-md-4">
+            <select id="difficulty" name="difficulty">
+                <option value="10">10 - Very difficult</option>
+                <option value="9">9</option>
+                <option value="8">8</option>
+                <option value="7">7</option>
+                <option value="6">6</option>
+                <option value="5" SELECTED>5 - Neither easy nor difficult</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1 - Very easy</option>
+            </select>
+        </div>
+    </div>
+    <br>
+    <div class="row question">
+         <div class="col-md-8">
+           How much time do you think you spent working on this task?
+         </div>
+         <div class="col-md-4">
+           <select id="time" name="time">
+             <option value="NA" SELECTED>Select one</option>
+             <option value="15">More than 15 minutes</option>
+             <option value="12">12-15 minutes</option>
+             <option value="10">9-12 minutes</option>
+             <option value="7">7-9 minutes</option>
+             <option value="5">5-7 minutes</option>
+             <option value="0">Less than 5 minutes</option>
+           </select>
+         </div>
+       </div></br>
+    <div class="row question">
+         <div class="col-md-8">
+           Did you find anything about this experiment to be confusing?
+         </div>
+         <div class="col-md-12">
+           <input id="multi-confusing" name="multi-confusing" type="text" class="form-control input-md">
+     </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div class="row question">
+        <div class="col-md-8">
+            While writing the summary on the previous page, did you return to the original link or look at any other sources? You will still be compensated if you did, so please be honest.
+        </div>
+        <div class="col-md-4">
+            <input type = "radio"
+                 name = "sources_during_summary"
+                 id = "sources_during_summary"
+                 value = "yes">&nbsp;&nbsp;Yes<br>
+            <input type = "radio"
+                 name = "sources_during_summary"
+                 id = "sources_during_summary"
+                 value = "no">&nbsp;&nbsp;No<br>
+        </div>
+    </div>
+    <br>
+    <div class="row question">
+        <div class="col-md-8">
+            Do you think you had heard about the study that you just read about before participating in this HIT?
+        </div>
+        <div class="col-md-4">
+            <input type = "radio"
+                 name = "previous_knowledge"
+                 id = "previous_knowledge"
+                 value = "yes">&nbsp;&nbsp;Yes<br>
+            <input type = "radio"
+                 name = "previous_knowledge"
+                 id = "previous_knowledge"
+                 value = "no">&nbsp;&nbsp;No<br>
+        </div>
+    </div>
+    <br>
+    <div class="row question">
+        <div class="col-md-8">
+            If so, where did you think you heard about it? (Check all that apply.)
+        </div>
+        <div class="col-md-4">
+            <input type = "checkbox"
+                 name = "previous_source"
+                 id = "previous_source"
+                 value = "general_news">&nbsp;&nbsp;General news article (e.g., <i>New York Times</i>, <i>Washington Post</i>)<br>
+            <input type = "checkbox"
+                 name = "previous_source"
+                 id = "previous_source"
+                 value = "scientific_news">&nbsp;&nbsp;Scientific sources or science-based media (e.g., journal article, <i>Scientific American</i>)<br>
+            <input type = "checkbox"
+                  name = "previous_source"
+                  id = "previous_source"
+                  value = "class">&nbsp;&nbsp;Class<br>
+            <input type = "checkbox"
+                  name = "previous_source"
+                  id = "previous_source"
+                  value = "audio">&nbsp;&nbsp;Podcasts or radio<br>
+            <input type = "checkbox"
+                 name = "previous_source"
+                 id = "previous_source"
+                 value = "shared_social_media">&nbsp;&nbsp;Social media<br>
+            <input type = "checkbox"
+                 name = "previous_source"
+                 id = "previous_source"
+                 value = "other">&nbsp;&nbsp;Other<br>
+            <input type = "checkbox"
+                 name = "previous_source"
+                 id = "previous_source"
+                 value = "na">&nbsp;&nbsp;Not applicable (hadn't heard about it before)<br>
+        </div>
+    </div>
+    <br>
+    <div class="row question">
+        <div class="col-md-8">
+            How many psychology or cognitive science classes have you taken (university level or above)? (Please estimate if you're not sure.)
+        </div>
+        <div class="col-md-4">
+            <input type = "radio"
+               name = "psych_classes"
+               id = "psych_classes"
+               value = "0">&nbsp;&nbsp;0<br>
+            <input type = "radio"
+                name = "psych_classes"
+                id = "psych_classes"
+                value = "1">&nbsp;&nbsp;1<br>
+            <input type = "radio"
+               name = "psych_classes"
+               id = "psych_classes"
+               value = "2">&nbsp;&nbsp;2<br>
+            <input type = "radio"
+                name = "psych_classes"
+                id = "psych_classes"
+                value = "3_or_more">&nbsp;&nbsp;3+<br>
+        </div>
+    </div>
+    <br>
+    <div class="row question">
+        <div class="col-md-8">
+            Have you been involved in helping to conduct any psychology research (either conducting your own studies or helping other people conduct studies)?
+        </div>
+        <div class="col-md-4">
+            <input type = "radio"
+                 name = "own_research"
+                 id = "own_research"
+                 value = "yes_own">&nbsp;&nbsp;Yes<br>
+            <input type = "radio"
+                 name = "own_research"
+                 id = "own_research"
+                 value = "no">&nbsp;&nbsp;No<br>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div class="row question">
+        <div class="col-md-8">
+            How old are you?
+        </div>
+        <div class="col-md-4">
+            <input type="number" name="age"><br>
+        </div>
+    </div>
+    <br>
+    <div class="row question">
+        <div class="col-md-8">
+            What is your gender identity?
+        </div>
+        <div class="col-md-4">
+            <input type = "radio"
+               name = "gender_id"
+               id = "gender_id"
+               value = "woman">&nbsp;&nbsp;Woman<br>
+            <input type = "radio"
+               name = "gender_id"
+               id = "gender_id"
+               value = "man">&nbsp;&nbsp;Man<br>
+            <input type = "radio"
+              name = "gender_id"
+              id = "gender_id"
+              value = "other">&nbsp;&nbsp;Other<br>
+            <input type = "radio"
+               name = "gender_id"
+               id = "gender_id"
+               value = "decline">&nbsp;&nbsp;Prefer not to say<br>
+        </div>
+    </div>
+    <br>
+    <div class="row question">
+      <div class="col-md-8">
+          Are you a native English speaker?
+      </div>
+      <table cellspacing="0" cellpadding="0" style="margin: 0; padding: 0; border: 0; outline: 0; vertical-align: baseline; background: transparent; white-space:nowrap;">
+              <tr><td><input type = "radio"
+                         name = "native_english"
+                         id = "native_english"
+                         value = "yes">Yes, native monolingual English speaker</td></tr>
+              <tr><td><input type = "radio"
+                        name = "native_english"
+                        id = "native_english"
+                        value = "bilingual">Yes, native bilingual English speaker (with any other language)</td></tr>
+              <tr><td><input type = "radio"
+                       name = "native_english"
+                       id = "native_english"
+                       value = "no_but_fully_fluent">No, but fully fluent English speaker</td></tr>
+              <tr><td><input type = "radio"
+                       name = "native_english"
+                       id = "native_english"
+                       value = "no_but_conversationally_fluent">No, but conversationally fluent English speaker</td></tr>
+              <tr><td><input type = "radio"
+                       name = "native_english"
+                       id = "native_english"
+                       value = "decline">Prefer not to say</td></tr>
+          </table>
+    </div>
+    <br>
+    <div class="row question">
+        <div class="col-md-8">
+            What is your ethnicity/race? (Check all that apply.)
+        </div>
+        <table cellspacing="0" cellpadding="0" style="margin: 0; padding: 0; border: 0; outline: 0; vertical-align: baseline; background: transparent; white-space:nowrap;">
+          <tr>
+                <td><input type = "checkbox"
+                    name = "ethnicity_race"
+                    id = "ethnicity_race"
+                    value = "african_american">African American or Black</td>
+                <td><input type = "checkbox"
+                     name = "ethnicity_race"
+                     id = "ethnicity_race"
+                     value = "asian">Asian</td>
+          <tr>
+                <td><input type = "checkbox"
+                     name = "ethnicity_race"
+                     id = "ethnicity_race"
+                     value = "hispanic_latinx">Hispanic or Latinx</td>
+                <td><input type = "checkbox"
+                      name = "ethnicity_race"
+                      id = "ethnicity_race"
+                      value = "nativeamerican_alaskanative">Native American or Alaska Native</td>
+          <tr>
+              <td><input type = "checkbox"
+                name = "ethnicity_race"
+                id = "ethnicity_race"
+                value = "nativehawaiian_pacificislander">Native Hawaiian or Pacific Islander</td>
+              <td><input type = "checkbox"
+                 name = "ethnicity_race"
+                 id = "ethnicity_race"
+                 value = "white">White</td>
+          <tr><td><input type = "checkbox"
+                name = "ethnicity_race"
+                id = "ethnicity_race"
+                value = "other">Other</td>
+              <td><input type = "checkbox"
+                name = "ethnicity_race"
+                id = "ethnicity_race"
+                value = "decline">Prefer not to say</td>
+          </tr>
+        </table>
+    </div>
+{% endblock %}
