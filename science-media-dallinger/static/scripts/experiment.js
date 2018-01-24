@@ -23,21 +23,21 @@ $(document).ready(function() {
     store.set("assignment_id", dallinger.getUrlParameter("assignment_id"));
     store.set("mode", dallinger.getUrlParameter("mode"));
 
-        dallinger.allowExit();
-        window.location.href = '/instructions';
-    });
+    dallinger.allowExit();
+    window.location.href = '/instructions';
+  });
 
-    // Consent to the experiment.
-    $("#no-consent").click(function() {
-        dallinger.allowExit();
-        window.close();
-    });
+  // Consent to the experiment.
+  $("#no-consent").click(function() {
+    dallinger.allowExit();
+    window.close();
+  });
 
-    // Move on to the experiment.
-    $("#go-to-experiment").click(function() {
-        dallinger.allowExit();
-        window.location.href = '/exp';
-    });
+  // Move on to the experiment.
+  $("#go-to-experiment").click(function() {
+    dallinger.allowExit();
+    window.location.href = '/exp';
+  });
 
   // Confirm that we're done with reading the stimulus.
   $("#finish-reading").click(function() {
@@ -49,7 +49,7 @@ $(document).ready(function() {
 
   $("#submit-response").click(function() {
 
-    if(checkWordCount()) {
+    if(checkWordCount() & checkBadWords()) {
 
       $("#submit-response").addClass('disabled');
       $("#submit-response").html('Sending...');
@@ -79,32 +79,32 @@ $(document).ready(function() {
 
   // Move on to the experiment.
   $("#go-to-experiment").click(function () {
-      dallinger.allowExit();
-      window.location.href = '/exp';
+    dallinger.allowExit();
+    window.location.href = '/exp';
   });
 
   // Submit the questionnaire ONLY if we haven't clicked yet.
   // Adapted from Dallinger Griduniverse repo:
   // https://github.com/Dallinger/Griduniverse/blob/master/dlgr/griduniverse/static/scripts/questionnaire.js
   if (lock===false){
-      $("#submit-questionnaire").click(function (){
+    $("#submit-questionnaire").click(function (){
 
-          dallinger.allowExit();
+      dallinger.allowExit();
 
-          // Prevent multiple submission clicks.
-          lock = true;
-          $(document).off('click');
+      // Prevent multiple submission clicks.
+      lock = true;
+      $(document).off('click');
 
-          // Allow the form to submit.
-          var $elements = [$("form :input"), $(this)],
-              questionSubmission = dallinger.submitQuestionnaire("questionnaire");
-              console.log("Submitting questionnaire.");
+      // Allow the form to submit.
+      var $elements = [$("form :input"), $(this)],
+      questionSubmission = dallinger.submitQuestionnaire("questionnaire");
+      console.log("Submitting questionnaire.");
 
-          // Submit questionnaire.
-          questionSubmission.done(function(){
-                dallinger.goToPage('debriefing');
-              });
+      // Submit questionnaire.
+      questionSubmission.done(function(){
+        dallinger.goToPage('debriefing');
       });
+    });
   };
 
   // Finish debriefing and submit HIT.
@@ -128,27 +128,27 @@ $(document).ready(function() {
 
 // Create the agent.
 var create_agent = function() {
-    $('#finish-reading').prop('disabled', true);
-    reqwest({
-        url: "/node/" + dallinger.identity.participantId,
-        method: 'post',
-        type: 'json',
-        success: function (resp) {
-            $('#finish-reading').prop('disabled', false);
-            my_node_id = resp.node.id;
-            get_info(my_node_id);
-        },
-        error: function (err) {
-            console.log(err);
-            errorResponse = JSON.parse(err.response);
-            if (errorResponse.hasOwnProperty('html')) {
-                $('body').html(errorResponse.html);
-            } else {
-                dallinger.allowExit();
-                dallinger.goToPage('questionnaire');
-            }
-        }
-    });
+  $('#finish-reading').prop('disabled', true);
+  reqwest({
+    url: "/node/" + dallinger.identity.participantId,
+    method: 'post',
+    type: 'json',
+    success: function (resp) {
+      $('#finish-reading').prop('disabled', false);
+      my_node_id = resp.node.id;
+      get_info(my_node_id);
+    },
+    error: function (err) {
+      console.log(err);
+      errorResponse = JSON.parse(err.response);
+      if (errorResponse.hasOwnProperty('html')) {
+        $('body').html(errorResponse.html);
+      } else {
+        dallinger.allowExit();
+        dallinger.goToPage('questionnaire');
+      }
+    }
+  });
 };
 
 var get_info = function() {
@@ -173,7 +173,7 @@ var get_info = function() {
 };
 
 var mySubmitResponses = function () {
-    mySubmitNextResponse(0, dallinger.submitAssignment);
+  mySubmitNextResponse(0, dallinger.submitAssignment);
 };
 
 var mySubmitNextResponse = function (n, callback) {
@@ -254,4 +254,33 @@ function checkWordCount(){
     return false
   }
   return true
+}
+
+function checkBadWords(){
+
+  s = document.getElementById("reproduction").value;
+
+  if(containsProfanity(s)){
+    alert("An expletive was detected in your text. Please do not use profanity here.");
+    return false
+  }
+    return true
+  }
+}
+
+// from: https://gist.github.com/gidili/4684261
+String.prototype.contains = function(str) { return this.indexOf(str) != -1; };
+
+// expand using: https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words/blob/master/en
+var profanities = new Array("fuck", "shit");
+
+var containsProfanity = function(text){
+  var returnVal = false;
+  for (var i = 0; i < profanities.length; i++) {
+    if(text.toLowerCase().contains(profanities[i].toLowerCase())){
+      returnVal = true;
+      break;
+    }
+  }
+  return returnVal;
 }
