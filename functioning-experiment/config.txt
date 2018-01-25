@@ -2,8 +2,8 @@
 mode = sandbox
 auto_recruit = true
 webdriver_type = phantomjs
-qualification_blacklist = "science_in_media"
-group_name = "science_in_media"
+qualification_blacklist = DO_NOT_USE_science_in_media
+group_name = DO_NOT_USE_science_in_media
 
 [MTurk]
 title = Thinking about science
