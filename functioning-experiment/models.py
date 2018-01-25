@@ -5,7 +5,7 @@ class ScientificChainSource(Source):
     """A Source that reads in a random story from a file and transmits it."""
 
     __mapper_args__ = {
-        "polymorphic_identity": "war_of_the_ghosts_source"
+        "polymorphic_identity": "science_in_media_source"
     }
 
     def _contents(self):
