@@ -5,10 +5,10 @@ webdriver_type = phantomjs
 group_name = science_media
 
 [MTurk]
-title = Science in the Media
+title = Thinking about science
 description = Read a brief article and then answer a survey.
-keywords = Psychology, reading, text
-base_payment = 1.80
+keywords = Psychology, reading, science
+base_payment = 1.50
 lifetime = 24
 duration = 1.0
 us_only = true

@@ -1,5 +1,9 @@
 var my_node_id;
 
+var minimum_word_length = 2;
+var profanities = new Array("2g1c","2 girls 1 cup","acrotomophilia","alabama hot pocket","alaskan pipeline","anilingus","apeshit","arsehole","asshole","assmunch","auto erotic","autoerotic","babeland","baby batter","baby juice","ball gag","ball gravy","ball kicking","ball licking","ball sack","ball sucking","bangbros","bareback","barely legal","barenaked","bastard","bastardo","bastinado","bbw","bdsm","beaner","beaners","beaver cleaver","beaver lips","bestiality","big black","big breasts","big knockers","big tits","bimbos","birdlock","bitch","bitches","black cock","blonde action","blonde on blonde action","blowjob","blow job","blow your load","blue waffle","blumpkin","bollocks","bondage","boner","boob","boobs","booty call","brown showers","brunette action","bukkake","bulldyke","bullet vibe","bullshit","bung hole","bunghole","busty","buttcheeks","butthole","camel toe","camgirl","camslut","camwhore","carpet muncher","carpetmuncher","chocolate rosebuds","circlejerk","cleveland steamer","clitoris","clover clamps","clusterfuck","coprolagnia","coprophilia","cornhole","creampie","cumming","cunnilingus","darkie","date rape","daterape","deep throat","deepthroat","dendrophilia","dildo","dingleberry","dingleberries","dirty pillows","dirty sanchez","doggie style","doggiestyle","doggy style","doggystyle","dog style","dolcett","domination","dominatrix","dommes","donkey punch","double dong","double penetration","dp action","dry hump","dvda","eat my ass","ecchi","ejaculation","erotic","erotism","escort","eunuch","faggot","fecal","felch","fellatio","feltch","female squirting","femdom","figging","fingerbang","fingering","fisting","foot fetish","footjob","frotting","fuck","fuck buttons","fuckin","fucking","fucktards","fudge packer","fudgepacker","futanari","gang bang","gay sex","genitals","giant cock","girl on top","girls gone wild","goatcx","goatse","god damn","gokkun","golden shower","goodpoop","goo girl","goregasm","group sex","g-spot","hand job","handjob","hentai","homoerotic","hot carl","hot chick","how to kill","how to murder","huge fat","jack off","jail bait","jailbait","jelly donut","jerk off","jigaboo","jiggaboo","jiggerboo","jizz","juggs","kike","kinbaku","kinkster","kinky","knobbing","leather restraint","leather straight jacket","lemon party","lolita","lovemaking","make me come","male squirting","masturbate","menage a trois","milf","missionary position","motherfucker","mound of venus","mr hands","muff diver","muffdiving","nambla","nawashi","neonazi","nigga","nigger","nig nog","nimphomania","nipple","nipples","nsfw images","nympho","nymphomania","octopussy","omorashi","one cup two girls","one guy one jar","panties","pedobear","pedophile","phone sex","piece of shit","piss pig","pisspig","playboy","pleasure chest","pole smoker","ponyplay","poontang","poop chute","poopchute","prince albert piercing","pthc","queaf","queef","raghead","raging boner","reverse cowgirl","rimjob","rosy palm","rosy palm and her 5 sisters","rusty trombone","schlong","scissoring","shaved beaver","shaved pussy","shemale","shibari","shitblimp","shitty","shrimping","slanteye","s&m","sodomize","sodomy","spic","splooge","splooge moose","spooge","spread legs","strap on","strapon","strappado","strip club","style doggy","suicide girls","sultry women","swastika","swinger","tainted love","tea bagging","threesome","throating","tongue in a","towelhead","tranny","tribadism","tub girl","tubgirl","twat","twink","twinkie","two girls one cup","upskirt","urethra play","urophilia","vagina","venus mound","violet wand","vorarephilia","voyeur","vulva","wetback","wet dream","white power","wrapping men","wrinkled starfish","xx","xxx","yaoi","yellow showers","yiffy","zoophilia"); // To expand, use https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words/blob/master/en
+
+
 // Prevent multiple submissions.
 lock = false;
 
@@ -48,7 +52,7 @@ $(document).ready(function() {
 
   $("#submit-response").click(function() {
 
-    if(checkWordCount()) {
+    if(checkWordCount() & checkBadWords()) {
 
       $("#submit-response").addClass('disabled');
       $("#submit-response").html('Sending...');
@@ -248,9 +252,37 @@ function checkWordCount(){
   s = s.replace(/(^\s*)|(\s*$)/gi,"");
   s = s.replace(/[ ]{2,}/gi," ");
   s = s.replace(/\n /,"\n");
-  if (s.split(' ').length <= 2) {
+  if (s.split(' ').length <= minimum_word_length) {
     alert("Please expand a little more on what you have written.");
     return false
   }
   return true
+}
+
+// Implement profanity filter.
+function checkBadWords(){
+
+  s = document.getElementById("reproduction").value;
+
+  if(containsProfanity(s)){
+    alert("An expletive was detected in your text. Please do not use profanity here.");
+    return false
+  } else {
+    return true
+  };
+}
+
+// from: https://gist.github.com/gidili/4684261
+String.prototype.contains = function(str) { return this.indexOf(str) != -1; };
+
+// Check if text contains profanity.
+var containsProfanity = function(text){
+  var returnVal = false;
+  for (var i = 0; i < profanities.length; i++) {
+    if(text.toLowerCase().contains(profanities[i].toLowerCase())){
+      returnVal = true;
+      break;
+    }
+  }
+  return returnVal;
 }
