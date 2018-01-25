@@ -77,9 +77,12 @@ var create_agent = function() {
 var get_info = function() {
   dallinger.getReceivedInfos(my_node_id)
     .done(function (resp) {
+
+      // Read in the story, already in HTML format.
       var story = resp.infos[0].contents;
-      var storyHTML = markdown.toHTML(story);
-      $("#story").html(storyHTML);
+
+      // Update the HTML for participants.
+      $("#story").html(story);
       $("#stimulus").show();
       $("#response-form").hide();
       $("#finish-reading").show();
