@@ -3,6 +3,7 @@ var my_node_id;
 
 // Specify important experiment variables.
 var minimum_word_length = 30;
+var profanities = new Array("fuck", "shit"); // To expand, use https://github.com/LDNOOBW/List-of-Dirty-Naughty-Obscene-and-Otherwise-Bad-Words/blob/master/en
 
 // Consent to the experiment.
 $(document).ready(function() {
@@ -49,8 +50,8 @@ $(document).ready(function() {
   // Submit the written response.
   $("#submit-response").click(function () {
 
-      // Only allow us to move on if we hit our minimum word count.
-      if (checkWordCount()) {
+      // Only allow us to move on with minimum words and no profanity.
+      if (checkWordCount() & checkBadWords()) {
           $("#submit-response").addClass('disabled');
           $("#submit-response").html('Sending...');
 
@@ -117,4 +118,32 @@ function checkWordCount(){
     return false
   }
   return true
+}
+
+// Implement profanity filter.
+function checkBadWords(){
+
+  s = document.getElementById("reproduction").value;
+
+  if(containsProfanity(s)){
+    alert("An expletive was detected in your text. Please do not use profanity here.");
+    return false
+  } else {
+    return true
+  };
+}
+
+// from: https://gist.github.com/gidili/4684261
+String.prototype.contains = function(str) { return this.indexOf(str) != -1; };
+
+// Check if text contains profanity.
+var containsProfanity = function(text){
+  var returnVal = false;
+  for (var i = 0; i < profanities.length; i++) {
+    if(text.toLowerCase().contains(profanities[i].toLowerCase())){
+      returnVal = true;
+      break;
+    }
+  }
+  return returnVal;
 }
