@@ -1,9 +1,10 @@
+// Create a shell variable for participant's node ID.
 var my_node_id;
 
 // Consent to the experiment.
 $(document).ready(function() {
 
-  // do not allow user to close or reload
+  // Do not allow user to close or reload.
   dallinger.preventExit = true;
 
   // Print the consent form.
@@ -11,7 +12,7 @@ $(document).ready(function() {
     window.print();
   });
 
-  // Consent to the experiment.
+  // Consent and go to instructions.
   $("#consent").click(function() {
     store.set("hit_id", dallinger.getUrlParameter("hit_id"));
     store.set("worker_id", dallinger.getUrlParameter("worker_id"));
@@ -22,18 +23,19 @@ $(document).ready(function() {
     window.location.href = '/instructions';
   });
 
-  // Consent to the experiment.
+  // Decline to participate in the experiment.
   $("#no-consent").click(function() {
     dallinger.allowExit();
     window.close();
   });
 
-  // Consent to the experiment.
+  // Proceed from instructions to experiment.
   $("#go-to-experiment").click(function() {
     dallinger.allowExit();
     window.location.href = '/exp';
   });
 
+  // Indicate that we've finished reading the stimulus.
   $("#finish-reading").click(function() {
     $("#stimulus").hide();
     $("#response-form").show();
@@ -41,6 +43,7 @@ $(document).ready(function() {
     $("#submit-response").html('Submit');
   });
 
+  // Submit the written response.
   $("#submit-response").click(function() {
     $("#submit-response").addClass('disabled');
     $("#submit-response").html('Sending...');
@@ -49,6 +52,7 @@ $(document).ready(function() {
 
     $("#reproduction").val("");
 
+    // Once we're done, send the response and move on.
     dallinger.createInfo(my_node_id, {
       contents: response,
       info_type: 'Info'
@@ -74,6 +78,7 @@ var create_agent = function() {
     });
 };
 
+// Get stimulus information from the network.
 var get_info = function() {
   dallinger.getReceivedInfos(my_node_id)
     .done(function (resp) {
