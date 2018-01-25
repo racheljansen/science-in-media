@@ -1,6 +1,9 @@
 // Create a shell variable for participant's node ID.
 var my_node_id;
 
+// Specify important experiment variables.
+var minimum_word_length = 30;
+
 // Consent to the experiment.
 $(document).ready(function() {
 
@@ -44,21 +47,25 @@ $(document).ready(function() {
   });
 
   // Submit the written response.
-  $("#submit-response").click(function() {
-    $("#submit-response").addClass('disabled');
-    $("#submit-response").html('Sending...');
+  $("#submit-response").click(function () {
 
-    var response = $("#reproduction").val();
+      // Only allow us to move on if we hit our minimum word count.
+      if (checkWordCount()) {
+          $("#submit-response").addClass('disabled');
+          $("#submit-response").html('Sending...');
 
-    $("#reproduction").val("");
+          var response = $("#reproduction").val();
 
-    // Once we're done, send the response and move on.
-    dallinger.createInfo(my_node_id, {
-      contents: response,
-      info_type: 'Info'
-    }).done(function (resp) {
-      create_agent();
-    });
+          $("#reproduction").val("");
+
+          // Once we're done, send the response and move on.
+          dallinger.createInfo(my_node_id, {
+            contents: response,
+            info_type: 'Info'
+          }).done(function (resp) {
+            create_agent();
+          });
+      };
   });
 
 });
@@ -98,3 +105,16 @@ var get_info = function() {
       $('body').html(errorResponse.html);
     });
 };
+
+// Check word count.
+function checkWordCount(){
+  s = document.getElementById("reproduction").value;
+  s = s.replace(/(^\s*)|(\s*$)/gi,"");
+  s = s.replace(/[ ]{2,}/gi," ");
+  s = s.replace(/\n /,"\n");
+  if (s.split(' ').length <= minimum_word_length) {
+    alert("Please expand a little more on what you have written.");
+    return false
+  }
+  return true
+}
