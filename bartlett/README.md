@@ -1,7 +1,8 @@
-# Bartlett (1932), stories
+# Science in the Media
+### Experiment code for R. Jansen, A. Paxton, P. Krafft, & T. L. Griffiths (in preparation)
 
-Frederic Bartlett's 1932 book *Remembering* documents early experiments that explore how using and transmitting a memory can affect the memory’s contents. Bartlett wanted to understand how culture shapes memory. Inspired by Philippe (1897), he performed a series of experiments that asked participants to repeatedly recall a memory or to pass it down a chain of people, from one to the next. Bartlett showed that the process of reproduction alters memories over time, causing them to take on features from an individual’s culture. More generally, the methods he developed expose cumulative effects of the forces that reshape and degrade memories and how they impact the structure and veracity of what we remember.
+This is a transmission-chain style experiment to explore how people understand science as it is presented in the media. The first participant in each chain is sent to one of five random articles (specified in the `static/stimuli` folder), reads the article, and then writes a summary of the finding. The second participant in the chain receives the first participant's summary and then writes their own summary of that finding. This process continues iteratively down the chain.
 
-Bartlett, F. C. (1932). Remembering. Cambridge: Cambridge University Press.
+All participants are also asked to complete a brief survey after completing their summary. The survey includes questions about their demographics, their impressions of the study, and their prior experience with the scientific process.
 
-In this demo, a story is passed down a chain.
+(Adapted from the Bartlett 1932 Dallinger demo.)
