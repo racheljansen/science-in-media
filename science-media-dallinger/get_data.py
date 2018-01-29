@@ -18,7 +18,7 @@ for i in range(len(df)):
                           'rep',str(row['rep'])])
 
     os.system('dallinger export --app ' + dlgr_id)
-
-    os.system('mkdir data/' + dlgr_id + '-data')
+    
     os.system('unzip data/' + dlgr_id + '-data.zip -d data/' + exp_name)
     os.system('mv data/' + exp_name + '/data/* data/' + exp_name + '/')
+    os.system('rm data/' + dlgr_id + '-data.zip')
