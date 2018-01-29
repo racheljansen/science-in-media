@@ -1,7 +1,0 @@
-id,creation_time,property1,property2,property3,property4,property5,failed,time_of_death,type,network_id,participant_id
-1,2018-01-25 11:28:21.374637,,,,,,f,,war_of_the_ghosts_source,1,
-2,2018-01-25 11:35:59.060824,,,,,,f,,node,1,1
-3,2018-01-25 11:46:55.342435,,,,,,f,,node,1,2
-4,2018-01-25 12:01:15.210237,,,,,,t,2018-01-25 12:02:04.198029,node,1,3
-5,2018-01-25 12:07:48.522138,,,,,,f,,node,1,4
-6,2018-01-25 12:14:57.200899,,,,,,f,,node,1,5
