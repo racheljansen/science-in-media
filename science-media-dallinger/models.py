@@ -1,5 +1,6 @@
 from dallinger.nodes import Source
 import random
+import stories
 
 class WarOfTheGhostsSource(Source):
     """A Source that reads in a random story from a file and transmits it."""
@@ -13,13 +14,6 @@ class WarOfTheGhostsSource(Source):
 
         transmit() -> _what() -> create_information() -> _contents().
         """
-        stories = [
-            "article1.html",
-            "article2.html",
-            "article3.html",
-            "article4.html",
-            "article5.html",                        
-        ]
-        story = random.choice(stories)
+        story = random.choice(stories.stories)
         with open("static/stimuli/{}".format(story), "r") as f:
             return f.read()
