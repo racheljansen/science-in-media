@@ -1,0 +1,1 @@
+stories = ['article2.html']
