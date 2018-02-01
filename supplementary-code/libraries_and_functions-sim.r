@@ -25,7 +25,8 @@ required_packages = c(
   'jsonlite',
   'lubridate',
   'tidyr',
-  'tibble'
+  'tibble',
+  'readr'
 )
 
 # load required packages
