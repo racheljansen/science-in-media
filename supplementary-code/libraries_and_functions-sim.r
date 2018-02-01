@@ -26,7 +26,8 @@ required_packages = c(
   'lubridate',
   'tidyr',
   'tibble',
-  'readr'
+  'readr',
+  'tools'
 )
 
 # load required packages

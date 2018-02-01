@@ -6,19 +6,25 @@ output: pdf_document
 
 This R markdown provides the data preparation for our CogSci proceedings paper (Jansen, Paxton, Krafft, Lombrozo, & Griffiths, *in preparation*).
 
+To run this from scratch, you will need the following files:
+
+* `./data-experiment/cleaned_data/joined_data.csv`: Merged summary and questionnaire data from Dallinger study, cleaned by P. Krafft (see code on GitHub). Available for download: https://osf.io/u7jyk/
+* `./data-ratings/`: Directory with ratings of the first and last summary in each transmission chain (coded by R. Jansen and P. Krafft).
+* `./supplementary-code/`: Directory with functions and libraries needed to run this code.
+
 **Code written by**: A. Paxton (University of California, Berkeley)
 
-**Date last modified**: 31 January 2018
+**Date last modified**: 1 Feb 2018
 
 ***
 
-# Data import
+# Data preparation: Questionnaires
 
 ***
 
 ## Preliminaries
 
-```{r prep-prelim, warning = FALSE, error = FALSE, message = FALSE}
+```{r prep-questionnaires, warning = FALSE, error = FALSE, message = FALSE}
 
 # clear our workspace
 rm(list=ls())
@@ -29,14 +35,52 @@ source('./supplementary-code/libraries_and_functions-sim.r')
 
 ```
 
+## Expand questionnaire file
+
+```{r read-questionnaire}
+
+# expand stringified JSON of questions
+questionnaire_file = read_csv('./data-experiment/cleaned_data/joined_data.csv') %>%
+  cbind(., jsonlite::stream_in(textConnection(.$survey))) %>%
+  select(-survey,-X1)
+
+```
+
+## Export to new file
+
+```{r export-expanded-questionnaire}
+
+write.table(questionnaire_file, './data-experiment/cleaned_data/sim-expanded_questionnaire.csv', 
+            sep=',', append = FALSE, quote = FALSE, row.names = FALSE, col.names = TRUE)
+
+```
+
+
 ***
 
-## Concatenate experiment files
+# Data prepartion: Ratings
 
-```{r concatenate-data, warning = FALSE, error = FALSE, message = FALSE}
+***
+
+## Preliminaries
+
+```{r prep-ratings, warning = FALSE, error = FALSE, message = FALSE}
+
+# clear our workspace
+rm(list=ls())
+
+# read in libraries and create functions
+source('./supplementary-code/required_packages-sim.r')
+source('./supplementary-code/libraries_and_functions-sim.r')
+
+```
+
+## Concatenate ratings files
+
+```{r concatenate-ratings, warning = FALSE, error = FALSE, message = FALSE}
 
 # get list of individual experiments included in the data
-experiment_files = list.dirs('./data', recursive=FALSE)
+rating_files = list.files('./data-ratings', recursive=FALSE)
 
 # concatenate the files
 vector_files = data.frame()
@@ -44,16 +88,17 @@ info_files = data.frame()
 questionnaire_files = data.frame()
 node_files = data.frame()
 participant_files = data.frame()
-for (experiment in experiment_files){
+
+
+for (rating_file in rating_files){
   
-  # read in the next experiment's files and add ID to each
-  exp_id = strsplit(as.character(experiment),"/|-")[[1]][3]
+  # read in the next file and get metadata
+  file_info = strsplit(file_path_sans_ext(as.character(rating_file)),"_|-")
+  rater_id = trim.spaces(file_info[[1]][2])
+  topic_name = trim.spaces(file_info[[1]][3])
   
-  # extract the metadata information
-  code_version = str_extract(experiment,"code_version--\\d+") %>% str_extract(.,'\\d+') #lookbehind wasn't working, not sure why
-  story_num = str_extract(experiment,"story_num--\\d+") %>% str_extract(.,'\\d+')
-  rep = str_extract(experiment,"rep--\\d+") %>% str_extract(.,'\\d+')
-  
+  x = read_csv(paste('./data-ratings/',rating_file,sep=''))
+
   # read in vector file
   next_vector = read_csv(paste(experiment,'/vector.csv',sep='')) %>% 
     mutate(experiment = exp_id) %>%

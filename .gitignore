@@ -3,9 +3,6 @@
 nyt_api_key.txt
 */snapshots
 */*.pyc
-<<<<<<< HEAD
-data/*
-=======
 */data/*
 *~
->>>>>>> origin/working
+data*/*
