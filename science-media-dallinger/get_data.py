@@ -2,7 +2,9 @@
 import pandas as pd
 import os, sys
 
-df = pd.read_csv('data/cogsci-experiments.csv', header = None)
+exp_file = sys.argv[1]
+
+df = pd.read_csv(exp_file, header = None)
 df.columns = ['exp_id','dlgr_id','code_version','story_num','rep']
 
 for i in range(len(df)):
