@@ -37,6 +37,17 @@ options(scipen=999)
 
 #### Create useful global variables ####
 
+# ignore these variables
+unneeded_vars = c('creation_time',
+                  'failed',
+                  'id',
+                  'network_id',
+                  'time_of_death',
+                  'type',
+                  'unique_id',
+                  'hit_id',
+                  'assignment_id')
+
 #### Crib other folks' functions #### 
 
 #' Adapted from rmd2rscript: script for converting .Rmd files to .R scripts
