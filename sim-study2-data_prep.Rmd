@@ -51,7 +51,10 @@ questionnaire_file = read_csv('./data-experiment/cleaned_data/joined_data.csv') 
 ```{r export-expanded-questionnaire}
 
 write.table(questionnaire_file, './data-experiment/cleaned_data/sim-expanded_questionnaire.csv', 
-            sep=',', append = FALSE, quote = FALSE, row.names = FALSE, col.names = TRUE)
+            na = "-999999999",
+            row.names = FALSE,
+            col.names = TRUE,
+            sep = "\t")
 
 ```
 
@@ -82,14 +85,6 @@ source('./supplementary-code/libraries_and_functions-sim.r')
 # get list of individual experiments included in the data
 rating_files = list.files('./data-ratings', recursive=FALSE)
 
-# concatenate the files
-vector_files = data.frame()
-info_files = data.frame()
-questionnaire_files = data.frame()
-node_files = data.frame()
-participant_files = data.frame()
-
-
 for (rating_file in rating_files){
   
   # read in the next file and get metadata
@@ -97,171 +92,10 @@ for (rating_file in rating_files){
   rater_id = trim.spaces(file_info[[1]][2])
   topic_name = trim.spaces(file_info[[1]][3])
   
-  x = read_csv(paste('./data-ratings/',rating_file,sep=''))
-
-  # read in vector file
-  next_vector = read_csv(paste(experiment,'/vector.csv',sep='')) %>% 
-    mutate(experiment = exp_id) %>%
-    mutate(code_version = code_version) %>%
-    mutate(story_num = story_num) %>%
-    mutate(rep = rep) %>%
-    select(-contains('property'),-one_of(unneeded_vars)) %>%
-    dplyr::filter(origin_id != 1)
-  
-  # read in info
-  next_info = read_csv(paste(experiment,'/info.csv',sep='')) %>% 
-    mutate(experiment = exp_id) %>%
-    mutate(code_version = code_version) %>%
-    mutate(story_num = story_num) %>%
-    mutate(rep = rep) %>%
-    select(-contains('property'),-one_of(unneeded_vars)) %>%
-    rename(summary = contents) %>%
-    dplyr::filter(origin_id != 1)
-  
-  # read in questionnaire
-  next_q = read_csv(paste(experiment,'/question.csv',sep='')) %>% 
-    mutate(experiment = exp_id) %>%
-    mutate(code_version = code_version) %>%
-    mutate(story_num = story_num) %>%
-    mutate(rep = rep) %>%
-    select(-contains('property'),-one_of(unneeded_vars))
-  
-  # read in node information
-  next_node = read_csv(paste(experiment,'/node.csv',sep='')) %>% 
-    mutate(experiment = exp_id) %>%
-    mutate(code_version = code_version) %>%
-    mutate(story_num = story_num) %>%
-    mutate(rep = rep) %>%
-    select(-contains('property'),-one_of(unneeded_vars)) %>%
-    na.omit()
-  
-  # read in participant information
-  next_participant = read_csv(paste(experiment,'/participant.csv',sep='')) %>% 
-    mutate(experiment = exp_id) %>%
-    mutate(code_version = code_version) %>%
-    mutate(story_num = story_num) %>%
-    mutate(rep = rep) %>%
-    dplyr::filter(status=='approved') %>%
-    select(-contains('property'),
-           -status,
-           -one_of(unneeded_vars))
-
-  # append to group files
-  vector_files = rbind.data.frame(vector_files, next_vector)
-  info_files = rbind.data.frame(info_files, next_info)
-  questionnaire_files = rbind.data.frame(questionnaire_files, next_q)
-  node_files = rbind.data.frame(node_files, next_node)
-  participant_files = rbind.data.frame(participant_files, next_participant)
+  # read in rating dataframe
+  rating_df = read_csv(paste('./data-ratings/',rating_file,sep=''))
 
 }
 
-# clean up
-rm(next_info, next_node, next_participant, next_q, next_vector)
 
 ```
-
-## Read in questionnaire data
-
-```{r expand-questionnaire}
-
-# clean up questionnaire data by converting the stringified JSONs to a new variable
-questionnaire_files = questionnaire_files %>% ungroup() %>%
-  select(experiment, participant_id, response, code_version, rep, story_num) %>%
-  cbind(., jsonlite::stream_in(textConnection(.$response))) %>%
-  select(-response)
-
-```
-
-## Export lightly cleaned data
-
-```{r export-lightly-cleaned-data}
-
-write.table(vector_files, './data/vector_files.csv', 
-            sep=',', append = FALSE, quote = FALSE, row.names = FALSE, col.names = TRUE)
-
-write.table(info_files, './data/info_files.csv', 
-            sep=',', append = FALSE, quote = FALSE, row.names = FALSE, col.names = TRUE)
-
-write.table(questionnaire_files, './data/questionnaire_files.csv', 
-            sep=',', append = FALSE, quote = FALSE, row.names = FALSE, col.names = TRUE)
-
-write.table(node_files, './data/node_files.csv', 
-            sep=',', append = FALSE, quote = FALSE, row.names = FALSE, col.names = TRUE)
-
-write.table(participant_files, './data/participant_files.csv', 
-            sep=',', append = FALSE, quote = FALSE, row.names = FALSE, col.names = TRUE)
-
-```
-
-## Combine into master dataframe
-
-```{r}
-
-x = full_join(questionnaire_files,
-  mutate(info_files, origin_id=origin_id-1), 
-              
-              by=c('experiment',
-                   'code_version',
-                   'rep',
-                   'story_num',
-                   'participant_id' = 'origin_id'))
-  
-#   
-#   # bring in the questionnaire data
-#   full_join(.,
-#             questionnaire_files,
-#             by = c('worker_id' = 'participant_id',
-#                    'experiment',
-#                    'code_version',
-#                    'rep',
-#                    'story_num')) %>%
-#   
-#   # bring in the node information
-#   full_join(.,
-#             node_files,
-#             by=c('experiment',
-#                    'code_version',
-#                    'rep',
-#                    'story_num',
-#                    'worker_id' = 'participant_id')) %>%
-#   
-#   full_join(.,
-#            mutate(info_files,origin_id=origin_id-1),
-#             by=c('experiment',
-#                    'code_version',
-#                    'rep',
-#                    'story_num',
-#                    'worker_id' = 'origin_id')) 
-#   
-#   
-#   
-#   full_join(node_files,
-#               participant_files,
-#               by=c('experiment',
-#                    'code_version',
-#                    'rep',
-#                    'story_num',
-#                    'participant_id' = 'worker_id')) %>%
-#   dplyr::filter(status == 'approved') %>%
-#   select(-status) %>%
-#   full_join(.,
-#             mutate(info_files,origin_id=origin_id-1),
-#             by=c('experiment',
-#                    'code_version',
-#                    'rep',
-#                    'story_num',
-#                    'participant_id' = 'origin_id')) %>%
-#   na.omit() %>%
-#   full_join(.,
-#             questionnaire_files)
-
-```
-
-## Create unique participant identifiers across experiments
-
-```{r}
-
-
-
-```
-
