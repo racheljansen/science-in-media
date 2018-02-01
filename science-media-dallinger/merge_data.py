@@ -15,6 +15,7 @@ for this_dir in files:
         print('Loading',this_dir,'...')
     except:
         print('Skipping',this_dir,'...')
+        continue
 
 
     for i in range(len(info)):
